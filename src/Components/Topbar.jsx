@@ -8,12 +8,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 const Topbar = () => {
   let username = localStorage.getItem("name");
+  let letter = username.substring(0, 2);
 
   return (
     <div className="sidebar__right">
       <div className="sidebar__right-top">
         <div className="top_left">
-          <span className="name_image">I</span>
+          <span className="name_image">{letter}</span>
           <p>{username}</p>
         </div>
         <div className="top_right">

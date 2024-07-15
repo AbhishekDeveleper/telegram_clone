@@ -36,35 +36,33 @@ const MessageArea = () => {
   return (
     <div className="sidebar__right-messageArea">
       <div className="messages-container" ref={messagesContainerRef}>
-        {chatData ? (
-          [...chatData].reverse().map((item, index) => {
-            const formattedTime = moment(item.created_at)
-              .tz(timezone)
-              .format("hh:mm A");
+        {chatData
+          ? [...chatData].reverse().map((item, index) => {
+              const formattedTime = moment(item.created_at)
+                .tz(timezone)
+                .format("hh:mm A");
 
-            const date = format(parseISO(item.created_at), "d");
-            const month = format(parseISO(item.created_at), "MMM");
-            return item.sender_id == creatorid ? (
-              <div className="outerdiv">
-                <p className="monthDate">
-                  {month} &nbsp;
-                  {date}
-                </p>
-                <div className="senderMessage" key={index}>
-                  <p className="messageSend">{item.message}</p>
+              const date = format(parseISO(item.created_at), "d");
+              const month = format(parseISO(item.created_at), "MMM");
+              return item.sender_id == creatorid ? (
+                <div className="outerdiv">
+                  <p className="monthDate">
+                    {month} &nbsp;
+                    {date}
+                  </p>
+                  <div className="senderMessage" key={index}>
+                    <p className="messageSend">{item.message}</p>
+                    <span className="time">{formattedTime}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="messagereceive">
+                  <p className="messageReceived">{item.message}</p>
                   <span className="time">{formattedTime}</span>
                 </div>
-              </div>
-            ) : (
-              <div className="messagereceive">
-                <p className="messageReceived">{item.message}</p>
-                <span className="time">{formattedTime}</span>
-              </div>
-            );
-          })
-        ) : (
-          <li>Loading...</li>
-        )}
+              );
+            })
+          : null}
       </div>
     </div>
   );
